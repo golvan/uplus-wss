@@ -306,7 +306,6 @@ export default {
     tmpActionParam.pySkipCookieConsent = 'true';
     this.actionParam = JSON.stringify(tmpActionParam);
     this.isMashupInitialized = true;
-
     /* If Mashup is already initialized - just return */
     if (
       typeof pega !== 'undefined' &&
