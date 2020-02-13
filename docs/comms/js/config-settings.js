@@ -208,7 +208,7 @@ window.settings = {
       "CorrespondenceName": "pyDefaultOTPCorr",
       "EmailAccount": "Default",
       "Subject": "New OTP Request",
-      "ToAddress": "piotr.koszela@pega.com",
+      "ToAddress": "",
       "ValidateMaxAge": "false"
     },
     sms_settings: {
