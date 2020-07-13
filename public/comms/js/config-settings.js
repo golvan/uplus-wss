@@ -145,6 +145,7 @@ window.settings = {
       pega_pwd: 'rules',
       bill_pay: 164.8,
       load_by_default: true,
+      otp_send_to: '',
     },
     {
       username: 'mary@pegasystems.com',
@@ -160,6 +161,7 @@ window.settings = {
       pega_pwd: 'rules',
       bill_pay: 164.8,
       load_by_default: false,
+      otp_send_to: '',
     },
   ],
   pega_chat: {
@@ -201,4 +203,23 @@ window.settings = {
       clickaction: 'Mashup',
     },
   },
+  pega_auth_2fa: {
+    url: window.location.origin,
+    otp_auth_enabled: true,
+    send_mode: "email",
+    email_settings: {
+      "CorrespondenceName": "pyDefaultOTPCorr",
+      "EmailAccount": "Default",
+      "Subject": "New OTP Request",
+      "ToAddress": "",
+      "ValidateMaxAge": "false"
+    },
+    sms_settings: {
+      "ToPhoneNumber": "",
+      "From": "Pega",
+      "SMSAccount": "Default",
+      "Message": "Uplus OTP login code",
+      "ValidateMaxAge": "false"
+    }
+  }
 };
