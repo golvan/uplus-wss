@@ -142,7 +142,7 @@ export default {
       } else {
         const otpReferenceId = document.getElementsByName('otpReferenceId')[0].value;
         if (otpReferenceId !== this.otpRefId) {
-          console.log('OTP ReferenceID origination did not match.');
+          throw new Error('Unable to process request. Incorrect or malformed referenced id.');
         } else {
           console.log(`Validating OTP: ${this.otp} with reference id: ${this.otpRefId}`);
           await validateOTP(this.otpRefId, this.otp, auth).then((result) => {

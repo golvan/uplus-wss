@@ -60,8 +60,10 @@ const validateOTP = async function validateOTP(referenceid, otp, auth) {
   if (otp === 'skip') {
     console.log('Skipping OTP Auth.');
     isOtpSuccess = true;
-  } else {
+  } else if (referenceid !== '') {
     isOtpSuccess = await callOtpStatus(referenceid, otp, auth);
+  } else {
+    throw new Error('Unable to process request. Empty referenced id.');
   }
   return isOtpSuccess;
 };
