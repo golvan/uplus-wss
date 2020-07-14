@@ -7,9 +7,7 @@
       :class="[isActive ? 'show' : 'hidden']"
     >
       <div class="field flex flex-col username">
-        <select id="username" type="text" v-model="username">
-          <option v-for="(item,index) in settings.users" v-bind:key="index">{{item.username}}</option>
-        </select>
+        <input id="username" type="username" v-model="username" />
         <label for="username">{{$t('message.username')}}</label>
       </div>
       <div class="field flex flex-col password">
@@ -36,6 +34,7 @@
 
 <script>
 import { mainconfig, updatePegaChat } from '../../global';
+import getUserSettings from '../../UserSettings';
 import {
   setAuth, validateOTP, requestOTP,
 } from '../../PegaAuthOtp';
@@ -116,6 +115,9 @@ export default {
       }
     },
     async signInOtp() {
+      /* Populate user settings */
+      const UserSettings = await getUserSettings(this.username, this.password);
+
       /* Validate the password and OTP */
       const auth = setAuth(this.username, this.password);
       const AuthStatus = {
@@ -125,10 +127,8 @@ export default {
       mainconfig.userId = -1;
       console.log(`2FA Auth enabled: ${this.otp_enabled}`);
       if (this.otp === '') {
-        for (const i in this.settings.users) {
-          if (this.settings.users[i].username === this.username) {
-            this.sendTo = this.settings.users[i].otp_send_to;
-          }
+        if (UserSettings.results.username === this.username) {
+          this.sendTo = UserSettings.results.otp_send_to;
         }
         await requestOTP(auth, this.sendTo).then((result) => {
           if (result.isSuccess) {
@@ -148,17 +148,15 @@ export default {
           await validateOTP(this.otpRefId, this.otp, auth).then((result) => {
             console.log(`OTP Auth validation status: ${result}`);
             AuthStatus.isOtpAuthSuccess = result;
-            for (const i in this.settings.users) {
-              if (
-                this.settings.users[i].username === this.username &&
-                this.settings.users[i].password === this.password &&
-                AuthStatus.isOtpAuthSuccess === true
-              ) {
-                AuthStatus.isLoginSuccess = true;
-                mainconfig.userId = i;
-                updatePegaChat(this.settings.users[i]);
-                break;
-              }
+            if (
+              UserSettings.results.username === this.username &&
+              UserSettings.results.password === this.password &&
+              AuthStatus.isOtpAuthSuccess === true
+            ) {
+              AuthStatus.isLoginSuccess = true;
+              mainconfig.userId = 0;
+              mainconfig.settings.users[0] = UserSettings.results;
+              updatePegaChat(UserSettings.results);
             }
             return AuthStatus;
           });

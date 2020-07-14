@@ -5,7 +5,7 @@ const axios = require('axios').default;
 
 const settings = mainconfig.settings;
 
-const baseUrl = settings.pega_auth_2fa.url;
+const baseUrl = settings.baseUrl;
 
 const setAuth = function setAuth(username, password) {
   let auth = '';
