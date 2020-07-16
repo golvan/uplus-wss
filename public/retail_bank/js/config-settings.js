@@ -8,18 +8,18 @@ window.settings = {
   },
   "quicklinks": [
     {
-      "title": {
-        "en": "Payment assistance",
-        "fr": "Payment assistance"
-      },
-      "action": "createNewWork",
-      "actionparam": "",
-      "objclass": "PegaFS-SCM-Work-SpecialCircumstance",
-      "url": window.location.origin + "/prweb/app/PegaCSFSSelfService_4995/",
-      "startcase": "pyStartCase",
-      "application": "PegaCSFSSelfService",
-      "icon": "pi-star",
-      "hide": false
+        "title": {
+          "en": "Add a member",
+          "fr": "Payment assistance"
+        },
+        "action": "createNewWork",
+        "actionparam": "",
+        "objclass": "PegaFS-SCM-Work-AddAMember",
+        "url": window.location.origin + "/prweb/app/PegaCSFSSelfService_0381/",
+        "startcase": "pyStartCase",
+        "application": "PegaCSFSSelfService",
+        "icon": "pi-star",
+        "hide": false,
     },
     {
       "title": {
