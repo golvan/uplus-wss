@@ -13,7 +13,7 @@ const getUserSettings = async function getUserSettings(userid, pass) {
   const headers = {
     Authorization: `Basic ${auth}`,
   };
-  const url = `${baseUrl}/prweb/PRRestService/api/v1/data/D_DataWSSInfo?username=${userid}&password=${pass}`;
+  const url = `${baseUrl}/prweb/PRRestService/api/v1/data/D_DataWSSInfo?username=${userid}`;
   const result = {
     IsSuccess: false,
     results: {},
